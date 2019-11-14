@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>SN: BP Assign to Material Master</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZMM_BPASSIGN_DBP01</SOBJ_NAME>
+    <SOBJ_NAME>LZMM_BPASSIGN_DBT99</SOBJ_NAME>
+    <SOBJ_NAME>LZMM_BPASSIGN_DBTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZMM_BPASSIGN_DB</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_CHANGE_CHECK</FUNCNAME>
+     <SHORT_TEXT>SN: Change Check BP Assignment or Subscreen</SHORT_TEXT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>CV_HAS_CHANGES</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>T130F-KZREF</TYP>
+      </RSCHA>
+     </CHANGING>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>CV_HAS_CHANGES</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_DB_POST</FUNCNAME>
+     <UPDATE_TASK>2</UPDATE_TASK>
+     <SHORT_TEXT>SN: UpdateBP Assignment Table on DB</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_GET_DB_DELTA</FUNCNAME>
+     <SHORT_TEXT>SN: Get BP Assignment DB Delta</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_GET_SUB</FUNCNAME>
+     <SHORT_TEXT>SN: Get BP Assignment for Subscreen</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <DEFAULT>SPACE</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>MARA-MATNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ET_JPTBUPAASSIGN_MEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_JPTBUPAASSIGN_DB</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_JPTBUPAASSIGN_MEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_JPTBUPAASSIGN_DB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_READ_DATA</FUNCNAME>
+     <SHORT_TEXT>SN: Read Data ID-Codes for Subscreen</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_RMMG1</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>RMMG1</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_AKTYP</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>T130M-AKTYP</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_RMMG1</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_AKTYP</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_MM_BPASSIGN_SET_SUB</FUNCNAME>
+     <SHORT_TEXT>SN: Set ID-Codes for Subscreen</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_JPTBUPAASSIGN_MEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZMM_T_JPTBUPAASSIGN</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_JPTBUPAASSIGN_MEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Table Type for BP Assign to Material Master</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
