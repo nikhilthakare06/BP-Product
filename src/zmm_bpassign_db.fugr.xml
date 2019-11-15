@@ -24,7 +24,6 @@
       <RSFDO>
        <PARAMETER>CV_HAS_CHANGES</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 001</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -51,19 +50,16 @@
        <PARAMETER>IT_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>IT_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>IT_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 003</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -92,19 +88,16 @@
        <PARAMETER>ET_ZMM_JPTBUPAASSIGN_INSERT</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ET_ZMM_JPTBUPAASSIGN_UPDATE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ET_ZMM_JPTBUPAASSIGN_DELETE</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 003</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -136,19 +129,16 @@
       <RSFDO>
        <PARAMETER>IV_MATNR</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ET_JPTBUPAASSIGN_MEM</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ET_JPTBUPAASSIGN_DB</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 003</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -171,12 +161,10 @@
       <RSFDO>
        <PARAMETER>IS_RMMG1</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>IV_AKTYP</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 002</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -199,13 +187,11 @@
       <RSFDO>
        <PARAMETER>IV_MATNR</PARAMETER>
        <KIND>P</KIND>
-       <INDEX> 001</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>IT_JPTBUPAASSIGN_MEM</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Table Type for BP Assign to Material Master</STEXT>
-       <INDEX> 002</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>
