@@ -5346,13 +5346,7 @@
        <LINE>*</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*}   INSERT</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW>
-       <LINE>PROCESS AFTER INPUT.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW>
-       <LINE>*{   INSERT         S4SK900317                                        1</LINE>
+       <LINE>PROCESS AFTER INPUT.                                     1</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*  MODULE ISM_OKCODE_EABR AT EXIT-COMMAND.</LINE>
@@ -5362,10 +5356,6 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>MODULE zz_bpassign_set_sub.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW/>
-      <RPY_DYFLOW>
-       <LINE>*}   INSERT</LINE>
       </RPY_DYFLOW>
      </FLOW_LOGIC>
      <SPACES>
@@ -5385,12 +5375,8 @@
       <item>0</item>
       <item>0</item>
       <item>0</item>
-      <item>0</item>
-      <item>0</item>
       <item>1</item>
       <item>1</item>
-      <item>0</item>
-      <item>0</item>
      </SPACES>
     </item>
     <item>
@@ -5638,6 +5624,7 @@
        <LENGTH>010</LENGTH>
        <VISLENGTH>010</VISLENGTH>
        <HEIGHT>001</HEIGHT>
+       <GROUP1>ABC</GROUP1>
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
        <CONV_EXIT>ALPHA</CONV_EXIT>
@@ -5857,10 +5844,10 @@
        <LINE>MODULE zz_bpassign_get_line.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>MODULE zz_bpassign_check.</LINE>
+       <LINE>*      MODULE zz_bpassign_check.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>MODULE zz_bpassign_modify_tab.</LINE>
+       <LINE>*      MODULE zz_bpassign_modify_tab.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*      MODULE ISM_BP_DETERMINE_ROW.</LINE>
@@ -5893,10 +5880,6 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*  MODULE set_daten_sub.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW/>
-      <RPY_DYFLOW>
-       <LINE>*PROCESS ON VALUE-REQUEST.</LINE>
       </RPY_DYFLOW>
      </FLOW_LOGIC>
      <SPACES>
@@ -5945,15 +5928,13 @@
       <item>6</item>
       <item>0</item>
       <item>7</item>
-      <item>6</item>
-      <item>6</item>
+      <item>0</item>
+      <item>0</item>
       <item>0</item>
       <item>0</item>
       <item>0</item>
       <item>4</item>
       <item>2</item>
-      <item>0</item>
-      <item>0</item>
       <item>0</item>
       <item>0</item>
       <item>0</item>
