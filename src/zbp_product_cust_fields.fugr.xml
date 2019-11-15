@@ -5346,7 +5346,7 @@
        <LINE>*</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>PROCESS AFTER INPUT.                                     1</LINE>
+       <LINE>PROCESS AFTER INPUT.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*  MODULE ISM_OKCODE_EABR AT EXIT-COMMAND.</LINE>
