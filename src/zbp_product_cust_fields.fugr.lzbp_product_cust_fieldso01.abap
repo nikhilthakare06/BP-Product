@@ -12,17 +12,17 @@ MODULE zz_get_hierarchlvl OUTPUT.
 ENDMODULE.
 
 MODULE zz_bpassign_get_sub OUTPUT.
-IF SY-UCOMM = 'PUSHID'.
-*  CALL FUNCTION 'Z_MM_JPTIDCDASS_GET_SUB'
-*    EXPORTING
-*      iv_matnr            = rmmg1-matnr
-*    IMPORTING
-*      et_jptidcdassig_mem = zzgt_zmm_jptidcdassig_mem
-*      et_jptidcdassig_db  = zzgt_zmm_jptidcdassig_db.
-*
-*  MOVE-CORRESPONDING zzgt_zmm_jptidcdassig_mem TO zzgt_bpassign.
-ENDIF.
-*}   REPLACE
+  IF sy-ucomm = 'ZBP_CALL'.
+    CALL FUNCTION 'Z_MM_BPASSIGN_GET_SUB'
+      EXPORTING
+        iv_matnr             = rmmg1-matnr
+      IMPORTING
+        et_jptbupaassign_mem = zzgt_zmm_bpassign_mem
+        et_jptbupaassign_db  = zzgt_zmm_bpassign_db.
+
+    MOVE-CORRESPONDING zzgt_zmm_bpassign_mem TO zzgt_bpassign.
+
+  ENDIF.
 ENDMODULE.
 
 MODULE zz_bpassign_init_tc OUTPUT.
@@ -34,15 +34,15 @@ MODULE zz_bpassign_init_tc OUTPUT.
 
   CLEAR: zzgv_bpassign_line_no.
 
-*  DESCRIBE TABLE zzgt_bpassign LINES zzgv_bpassign_lines.
-*
-*  IF NOT flg_tc IS INITIAL.
-*    REFRESH CONTROL 'ZZTC_bpassign' FROM SCREEN sy-dynnr.
-*    zztc_bpassign-lines    = zzgv_bpassign_lines.
-*    zztc_bpassign-top_line = zzgv_bpassign_first_line + 1.
-*    zzgv_bpassign_topl_buf = zztc_bpassign-top_line.
-*    ASSIGN zztc_bpassign TO <f_tc>.
-*  ENDIF.
+  DESCRIBE TABLE zzgt_bpassign LINES zzgv_bpassign_lines.
+
+  IF NOT flg_tc IS INITIAL.
+    REFRESH CONTROL 'ZZTC_BUPA_ASSIGN' FROM SCREEN sy-dynnr.
+    zztc_bupa_assign-lines    = zzgv_bpassign_lines.
+    zztc_bupa_assign-top_line = zzgv_bpassign_first_line + 1.
+    zzgv_bpassign_topl_buf    = zztc_bupa_assign-top_line.
+    ASSIGN zztc_bupa_assign TO <f_tc>.
+  ENDIF.
 
 ENDMODULE.
 
@@ -50,11 +50,11 @@ MODULE zz_bpassign_display OUTPUT.
 
   zzgv_bpassign_current_line = zzgv_bpassign_first_line + sy-stepl.
 
-*  READ TABLE zzgt_bpassign INTO zzgs_bpassign INDEX zzgv_bpassign_current_line.
-*
-*  IF sy-subrc = 0.
-*    MOVE-CORRESPONDING zzgs_bpassign TO zjptidcdassig.
-*  ENDIF.
+  READ TABLE zzgt_bpassign INTO zzgs_bpassign INDEX zzgv_bpassign_current_line.
+
+  IF sy-subrc = 0.
+    MOVE-CORRESPONDING zzgs_bpassign TO zrjpbupat1.
+  ENDIF.
 
 ENDMODULE.
 
@@ -170,26 +170,27 @@ MODULE zz_bpassign_fieldselection OUTPUT.
 ENDMODULE.
 
 MODULE zz_bpassign_get_entries OUTPUT.
-*  zzgv_bpassign_entries_c   = zzgv_bpassign_lines.
-*  IF zzgv_bpassign_lines = 0.
-*    zzgv_bpassign_first_line_c = 0.
-*  ELSE.
-*    zzgv_bpassign_first_line_c = zzgv_bpassign_first_line + 1.
-*  ENDIF.
+  zzgv_bpassign_entries_c   = zzgv_bpassign_lines.
+  IF zzgv_bpassign_lines = 0.
+    zzgv_bpassign_first_line_c = 0.
+  ELSE.
+    zzgv_bpassign_first_line_c = zzgv_bpassign_first_line + 1.
+  ENDIF.
 ENDMODULE.
 
 MODULE zz_bpassign_set_sub OUTPUT.
-*  CLEAR: zzgt_zmm_jptidcdassig_mem.
+  CLEAR: zzgt_zmm_bpassign_mem.
+
+  LOOP AT zzgt_bpassign INTO zzgs_bpassign.
+    MOVE-CORRESPONDING zzgs_bpassign TO zzgs_zmm_bpassign_mem.
+    zzgs_zmm_bpassign_mem-matnr = rmmg1-matnr.
+*    zzgs_zmm_bpassign_mem-mandt = sy-mandt.
+    INSERT zzgs_zmm_bpassign_mem INTO TABLE zzgt_zmm_bpassign_mem.
+  ENDLOOP.
 *
-*  LOOP AT zzgt_bpassign INTO zzgs_bpassign.
-*    MOVE-CORRESPONDING zzgs_bpassign TO zzgs_zmm_jptidcdassig_mem.
-*    zzgs_zmm_jptidcdassig_mem-matnr = rmmg1-matnr.
-*    zzgs_zmm_jptidcdassig_mem-mandt = sy-mandt.
-*    INSERT zzgs_zmm_jptidcdassig_mem INTO TABLE zzgt_zmm_jptidcdassig_mem.
-*  ENDLOOP.
-*
-*  CALL FUNCTION 'Z_MM_JPTIDCDASS_SET_SUB'
-*    EXPORTING
-*      iv_matnr            = rmmg1-matnr
-*      it_jptidcdassig_mem = zzgt_zmm_jptidcdassig_mem.
+  CALL FUNCTION 'Z_MM_BPASSIGN_SET_SUB'
+    EXPORTING
+      iv_matnr             = rmmg1-matnr
+      it_jptbupaassign_mem = zzgt_zmm_bpassign_mem.
+
 ENDMODULE.

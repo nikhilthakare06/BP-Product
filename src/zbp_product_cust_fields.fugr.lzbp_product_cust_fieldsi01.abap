@@ -50,88 +50,104 @@ ENDMODULE.
 
 *MODULE zz_bpassign_check INPUT.
 *
-*  "only one example at this moment
-*  IF ZJPTBUPAASSIGN-identcode EQ '99'.
+*  IF NOT ( t130m-aktyp = aktypa
+*           OR t130m-aktyp = aktypz    "view
+*           OR rmmg2-manbr NE space ). "central authority
 *
-*    bildflag = x.
-*    MESSAGE 'Example Error' TYPE 'E'.
-*  ENDIF.
-*
-*ENDMODULE.
-
-*MODULE zz_bpassign_modify_tab INPUT.
-*
-*  IF NOT zjptbupaassign-idcodetype IS INITIAL OR
-*     NOT zjptbupaassign-identcode IS INITIAL OR
-*     NOT zjptbupaassign-xmainidcode IS INITIAL.
-*
-*    MOVE-CORRESPONDING zjptbupaassign TO zzgs_bpassign.
-*
-*    IF zzgv_bpassign_current_line > zzgv_bpassign_lines.
-*      APPEND zzgs_bpassign TO zzgt_bpassign.
-*      zzgv_bpassign_lines = zzgv_bpassign_lines + 1.
-*    ELSE.
-*      MODIFY zzgt_bpassign FROM zzgs_bpassign INDEX zzgv_bpassign_current_line.
+*    IF zzgv_bpassign_current_line LE zzgv_bpassign_lines.
+*      MODIFY zzgt_bpassign_pre FROM zzgs_bpassign INDEX zzgv_bpassign_current_line.
 *    ENDIF.
 *
-*  ENDIF.
+*    zjptidcdassig-matnr = rmmg1-matnr. "needed, because in GUI MATNR is not available.
+*    CALL FUNCTION 'Z_MM_JPTIDCDASS_CHECK_IDCODE'
+*      EXPORTING
+*        it_bpassign_gui  = zzgt_bpassign_pre
+*      CHANGING
+*        cs_jptidcdassig = zjptidcdassig
+*      EXCEPTIONS
+*        type_not_exist  = 1
+*        cds_calculated  = 2
+*        OTHERS          = 3.
 *
-*ENDMODULE.
-
-*MODULE zz_bpassign_okcode INPUT.
+*    IF sy-subrc EQ 1.
+*      "message only for non empty lines
+*      IF zjptidcdassig-idcodetype IS NOT INITIAL OR
+*         zjptidcdassig-identcode IS NOT INITIAL.
 *
-**{   REPLACE        S4SK900317                                        1
-**\  CHECK t130m-aktyp NE aktypa AND t130m-aktyp NE aktypz.
-**\  CHECK bildflag IS INITIAL.
-**\
-**\  CASE rmmzu-okcode.
-**\    WHEN zzgc_fcode_zidde. "delete entry
-**\
-**\      bildflag = x.
-**\      CLEAR rmmzu-okcode.
-**\
-**\      GET CURSOR LINE zzgv_bpassign_line_no.
-**\      zzgv_bpassign_current_line = zzgv_bpassign_first_line + zzgv_bpassign_line_no.
-**\
-**\      READ TABLE zzgt_bpassign TRANSPORTING NO FIELDS INDEX zzgv_bpassign_current_line.
-**\      IF sy-subrc = 0.
-**\        DELETE zzgt_bpassign INDEX zzgv_bpassign_current_line.
-**\      ENDIF.
-**\
-**\  ENDCASE.
-*  CHECK t130m-aktyp NE aktypa AND t130m-aktyp NE aktypz.
-*  CHECK bildflag IS INITIAL.
-*
-**  CASE rmmzu-okcode.
-*  CASE sy-ucomm.
-*    WHEN zzgc_fcode_zidde. "delete entry
-*
-*      bildflag = x.
-*      CLEAR rmmzu-okcode.
-*
-*      GET CURSOR LINE zzgv_bpassign_line_no.
-*      zzgv_bpassign_current_line = zzgv_bpassign_first_line + zzgv_bpassign_line_no.
-*
-*      READ TABLE zzgt_bpassign TRANSPORTING NO FIELDS INDEX zzgv_bpassign_current_line.
-*      IF sy-subrc = 0.
-*        DELETE zzgt_bpassign INDEX zzgv_bpassign_current_line.
+*        MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+*            WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
 *      ENDIF.
+*    ELSEIF sy-subrc EQ 2.
+*      "message only for new entries
+*      READ TABLE zzgt_zmm_jptidcdassig_db TRANSPORTING NO FIELDS "#EC CI_SORTSEQ
+*        WITH KEY
+*          idcodetype = zjptidcdassig-idcodetype
+*          identcode  = zjptidcdassig-identcode ##PRIMKEY[TYPES_KEY].
 *
-*  ENDCASE.
-**}   REPLACE
+*      IF sy-subrc NE 0.
+*        CLEAR: zjptidcdassig.
+*        MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+*          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+*      ENDIF.
+*    ELSEIF sy-subrc NE 0.
+*      MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+*              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+*    ENDIF.
+*  ENDIF.
+*
 *
 *ENDMODULE.
 
-*MODULE zz_bpassign_set_first.
-*  "scroll in table-control
-*  IF NOT flg_tc IS INITIAL.
-*    zzgv_bpassign_first_line = zztc_bpassign-top_line - 1.
-*    IF zztc_bpassign-top_line NE zzgv_bpassign_topl_buf.
-*      zzgv_bpassign_topl_buf = zztc_bpassign-top_line.
-*      PERFORM param_set.
-*    ENDIF.
-*  ENDIF.
-*ENDMODULE.
+MODULE zz_bpassign_modify_tab INPUT.
+
+  IF zrjpbupat1 IS NOT INITIAL.
+
+    IF zzgv_bpassign_current_line > zzgv_bpassign_lines.
+      APPEND zrjpbupat1 TO zzgt_bpassign.
+      zzgv_bpassign_lines = zzgv_bpassign_lines + 1.
+    ELSE.
+      MODIFY zzgt_bpassign FROM zrjpbupat1 INDEX zzgv_bpassign_current_line.
+    ENDIF.
+
+  ENDIF.
+
+ENDMODULE.
+
+MODULE zz_bpassign_okcode INPUT.
+
+  CHECK t130m-aktyp NE aktypa AND t130m-aktyp NE aktypz.
+*  CHECK bildflag IS INITIAL.
+
+*  CASE rmmzu-okcode.
+  CASE sy-ucomm.
+    WHEN zzgc_fcode_zbp. "delete entry
+
+      bildflag = x.
+      CLEAR rmmzu-okcode.
+
+      GET CURSOR LINE zzgv_bpassign_line_no.
+      zzgv_bpassign_current_line = zzgv_bpassign_first_line + zzgv_bpassign_line_no.
+
+      READ TABLE zzgt_bpassign TRANSPORTING NO FIELDS INDEX zzgv_bpassign_current_line.
+      IF sy-subrc = 0.
+        DELETE zzgt_bpassign INDEX zzgv_bpassign_current_line.
+      ENDIF.
+
+  ENDCASE.
+*}   REPLACE
+
+ENDMODULE.
+
+MODULE zz_bpassign_set_first.
+  "scroll in table-control
+  IF NOT flg_tc IS INITIAL.
+    zzgv_bpassign_first_line = zztc_bupa_assign-top_line - 1.
+    IF zztc_bupa_assign-top_line NE zzgv_bpassign_topl_buf.
+      zzgv_bpassign_topl_buf = zztc_bupa_assign-top_line.
+      PERFORM param_set.
+    ENDIF.
+  ENDIF.
+ENDMODULE.
 
 MODULE zz_bpassign_set_sub INPUT.
 *{   REPLACE        S4SK900317                                        1
@@ -167,8 +183,8 @@ MODULE zz_bpassign_set_sub INPUT.
 
       CALL FUNCTION 'Z_MM_BPASSIGN_SET_SUB'
         EXPORTING
-          iv_matnr        = rmmg1-matnr
-          it_bpassign_mem = zzgt_zmm_bpassign_mem.
+          iv_matnr             = rmmg1-matnr
+          it_jptbupaassign_mem = zzgt_zmm_bpassign_mem.
 
       zzgv_bp_assigned = 'X'.
 

@@ -5064,7 +5064,7 @@
       <TYPE>I</TYPE>
       <NEXTSCREEN>9001</NEXTSCREEN>
       <LINES>001</LINES>
-      <COLUMNS>104</COLUMNS>
+      <COLUMNS>080</COLUMNS>
      </HEADER>
      <CONTAINERS>
       <RPY_DYCATT>
@@ -5167,8 +5167,8 @@
       <DESCRIPT>Header Data: Material Number/ID Code</DESCRIPT>
       <TYPE>I</TYPE>
       <NEXTSCREEN>9002</NEXTSCREEN>
-      <LINES>001</LINES>
-      <COLUMNS>083</COLUMNS>
+      <LINES>016</LINES>
+      <COLUMNS>080</COLUMNS>
      </HEADER>
      <CONTAINERS>
       <RPY_DYCATT>
@@ -5288,8 +5288,17 @@
        <ELEMENT_OF>SCREEN</ELEMENT_OF>
        <LINE>001</LINE>
        <COLUMN>001</COLUMN>
-       <LENGTH>050</LENGTH>
-       <HEIGHT>021</HEIGHT>
+       <LENGTH>080</LENGTH>
+       <HEIGHT>005</HEIGHT>
+      </RPY_DYCATT>
+      <RPY_DYCATT>
+       <TYPE>SUBSCREEN</TYPE>
+       <NAME>SUB2</NAME>
+       <ELEMENT_OF>SCREEN</ELEMENT_OF>
+       <LINE>007</LINE>
+       <COLUMN>001</COLUMN>
+       <LENGTH>080</LENGTH>
+       <HEIGHT>019</HEIGHT>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
@@ -5334,10 +5343,10 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
-       <LINE>*CALL SUBSCREEN SUB1  INCLUDING &apos;SAPLZBP_PRODUCT_CUST_FIELDS&apos; &apos;9002&apos;.</LINE>
+       <LINE>CALL SUBSCREEN SUB1  INCLUDING &apos;SAPLZBP_PRODUCT_CUST_FIELDS&apos; &apos;9002&apos;.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>CALL SUBSCREEN SUB1  INCLUDING &apos;SAPLZBP_PRODUCT_CUST_FIELDS&apos; &apos;9006&apos;.</LINE>
+       <LINE>CALL SUBSCREEN SUB2  INCLUDING &apos;SAPLZBP_PRODUCT_CUST_FIELDS&apos; &apos;9006&apos;.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>* MODULE STATUS_9002.</LINE>
@@ -5353,6 +5362,9 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>CALL SUBSCREEN SUB1.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>CALL SUBSCREEN SUB2.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>MODULE zz_bpassign_set_sub.</LINE>
@@ -5377,6 +5389,7 @@
       <item>0</item>
       <item>1</item>
       <item>1</item>
+      <item>1</item>
      </SPACES>
     </item>
     <item>
@@ -5384,7 +5397,7 @@
       <PROGRAM>SAPLZBP_PRODUCT_CUST_FIELDS</PROGRAM>
       <SCREEN>9006</SCREEN>
       <LANGUAGE>E</LANGUAGE>
-      <DESCRIPT>SN: ID-Codes</DESCRIPT>
+      <DESCRIPT>SN: BP-Codes</DESCRIPT>
       <TYPE>I</TYPE>
       <NEXTSCREEN>0000</NEXTSCREEN>
       <LINES>016</LINES>
@@ -5523,7 +5536,6 @@
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
        <MODIFIC>2</MODIFIC>
-       <UP_LOWER>X</UP_LOWER>
        <REQU_ENTRY>N</REQU_ENTRY>
        <TC_HEADING>X</TC_HEADING>
       </RPY_DYFATC>
@@ -5558,7 +5570,6 @@
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
        <MODIFIC>2</MODIFIC>
-       <UP_LOWER>X</UP_LOWER>
        <REQU_ENTRY>N</REQU_ENTRY>
        <TC_HEADING>X</TC_HEADING>
       </RPY_DYFATC>
@@ -5740,6 +5751,13 @@
        <LINE>MODULE init_sub.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
+       <LINE>MODULE get_daten_sub.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>MODULE zz_bpassign_get_sub.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW/>
+      <RPY_DYFLOW>
        <LINE>MODULE feldauswahl.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
@@ -5753,18 +5771,10 @@
        <LINE>MODULE tc_on_dynpro.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*  MODULE zz_idcodes_init_tc.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW/>
-      <RPY_DYFLOW>
-       <LINE>*  MODULE tc_set_invisible.</LINE>
+       <LINE>MODULE zz_bpassign_init_tc.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*  MODULE zz_idcodes_get_entries.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW/>
-      <RPY_DYFLOW>
-       <LINE>MODULE set_daten_sub.</LINE>
+       <LINE>*  MODULE set_daten_sub.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
@@ -5780,14 +5790,24 @@
        <LINE>MODULE zz_bpassign_fieldselection.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*    MODULE tc_check_invisible.</LINE>
+       <LINE>MODULE tc_check_invisible.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>ENDLOOP.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
-       <LINE>*  MODULE DETERMINE_ROWS_CHAR_BPTC.</LINE>
+       <LINE>*  MODULE tc_set_invisible.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>MODULE zz_bpassign_get_entries.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW/>
+      <RPY_DYFLOW>
+       <LINE>MODULE set_daten_sub.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>MODULE zz_bpassign_set_sub.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
@@ -5825,29 +5845,29 @@
        <LINE>CHAIN.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZRJPBUPAT1-BU_PARTNER.</LINE>
+       <LINE>FIELD zrjpbupat1-bu_partner.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZRJPBUPAT1-BU_RLTYP.</LINE>
+       <LINE>FIELD zrjpbupat1-bu_rltyp.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZRJPBUPAT1-ORDER_ROLE.</LINE>
+       <LINE>FIELD zrjpbupat1-order_role.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZRJPBUPAT1-DATE_FROM.</LINE>
+       <LINE>FIELD zrjpbupat1-date_from.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>FIELD ZRJPBUPAT1-DATE_TO.</LINE>
+       <LINE>FIELD zrjpbupat1-date_to.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
        <LINE>MODULE zz_bpassign_get_line.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*      MODULE zz_bpassign_check.</LINE>
+       <LINE>*       MODULE zz_bpassign_check.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*      MODULE zz_bpassign_modify_tab.</LINE>
+       <LINE>MODULE zz_bpassign_modify_tab.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*      MODULE ISM_BP_DETERMINE_ROW.</LINE>
@@ -5866,20 +5886,14 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
-       <LINE>*   MODULE zz_bpassign_okcode.     &quot;handle FCODE</LINE>
+       <LINE>MODULE zz_bpassign_okcode.     &quot;handle FCODE</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
-       <LINE>*  MODULE zz_bpassign_set_first.</LINE>
+       <LINE>MODULE zz_bpassign_set_first.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW/>
       <RPY_DYFLOW>
-       <LINE>*  MODULE zz_idcodes_okcode.     &quot;handle FCODE</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW>
-       <LINE>*  MODULE zz_idcodes_set_first.</LINE>
-      </RPY_DYFLOW>
-      <RPY_DYFLOW>
-       <LINE>*  MODULE set_daten_sub.</LINE>
+       <LINE>MODULE set_daten_sub.</LINE>
       </RPY_DYFLOW>
      </FLOW_LOGIC>
      <SPACES>
@@ -5888,21 +5902,34 @@
       <item>2</item>
       <item>2</item>
       <item>2</item>
+      <item>0</item>
+      <item>2</item>
+      <item>2</item>
       <item>2</item>
       <item>0</item>
       <item>2</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
       <item>2</item>
+      <item>0</item>
       <item>0</item>
       <item>2</item>
       <item>0</item>
       <item>4</item>
       <item>4</item>
+      <item>4</item>
+      <item>2</item>
       <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>0</item>
+      <item>2</item>
+      <item>2</item>
+      <item>0</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
+      <item>0</item>
+      <item>0</item>
+      <item>2</item>
       <item>2</item>
       <item>0</item>
       <item>0</item>
@@ -5910,16 +5937,6 @@
       <item>0</item>
       <item>0</item>
       <item>2</item>
-      <item>0</item>
-      <item>0</item>
-      <item>2</item>
-      <item>2</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>3</item>
       <item>4</item>
       <item>6</item>
       <item>6</item>
@@ -5927,21 +5944,19 @@
       <item>6</item>
       <item>6</item>
       <item>0</item>
-      <item>7</item>
+      <item>6</item>
       <item>0</item>
-      <item>0</item>
+      <item>6</item>
       <item>0</item>
       <item>0</item>
       <item>0</item>
       <item>4</item>
       <item>2</item>
       <item>0</item>
+      <item>2</item>
+      <item>2</item>
       <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
-      <item>0</item>
+      <item>2</item>
      </SPACES>
     </item>
    </DYNPROS>

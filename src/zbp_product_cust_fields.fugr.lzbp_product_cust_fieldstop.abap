@@ -64,6 +64,11 @@ TABLES:   ztjpbpvalidrltyp.
 DATA: zzgt_bpassign TYPE TABLE OF zrjpbupat1,
       zzgs_bpassign TYPE zrjpbupat1.
 
+*&SPWIZARD: INTERNAL TABLE FOR TABLECONTROL 'TC_IDCODES'
+DATA: "zzgt_bpassign    TYPE zrjpbupat1 OCCURS 0,
+      zzgt_bpassign_pre TYPE zrjpbupat1 OCCURS 0.
+      "zzgs_bpassign     TYPE zrjpbupat1.
+
 *&SPWIZARD: DECLARATION OF TABLECONTROL 'TC_bpassign' ITSELF
 CONTROLS: zztc_bupa_assign TYPE TABLEVIEW USING SCREEN 9006. "#EC CI_CONV_OK
 
@@ -71,7 +76,10 @@ CONTROLS: zztc_bupa_assign TYPE TABLEVIEW USING SCREEN 9006. "#EC CI_CONV_OK
 *DATA: zzgv_bpassign_lines           TYPE sy-tabix,
 *      zzgv_bpassign_topl_buf        TYPE sy-stepl,
 
-DATA: zzgv_bpassign_line_no         TYPE sy-tabix,
+DATA: zzgv_bpassign_topl_buf        TYPE sy-stepl,
+      zzgv_bpassign_lines           TYPE sy-tabix,
+
+      zzgv_bpassign_line_no         TYPE sy-tabix,
       zzgv_bpassign_current_line    TYPE sy-tabix,
       zzgv_bpassign_first_line      TYPE sy-tabix,
 *
