@@ -15,8 +15,11 @@ MODULE user_command_9003 INPUT.
 *       ls_jpdid TYPE zjptidcdassig.
 *BREAK THAK04.
    IF  sy-ucomm = 'ZBP_CALL'.
-    CALL SCREEN '9005' STARTING AT 38 05
-                              ENDING   AT 83 25.
+    CALL SCREEN '9005' STARTING AT 06 04
+                       ENDING   AT 88 24.
+
+*  CALL SCREEN con_dynpro_1000 STARTING AT 06 04
+*                              ENDING   AT 88 24.
    ENDIF.
 **CHECK ZJPTIDCDASSIG-IDCODETYPE IS NOT INITIAL AND ZJPTIDCDASSIG-IDENTCODE IS NOT INITIAL.
 *

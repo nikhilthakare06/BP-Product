@@ -197,3 +197,11 @@ MODULE zz_bpassign_set_sub INPUT.
   ENDCASE.
 *}   REPLACE
 ENDMODULE.
+*&---------------------------------------------------------------------*
+*&      Module  GET_BP_TEXT_ROLE_TITLE  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE get_bp_text_role_title INPUT.
+
+ENDMODULE.

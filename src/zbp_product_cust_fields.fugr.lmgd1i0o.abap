@@ -26,3 +26,22 @@ MODULE MARA-PRDHA.
             PTAB_IN    = PTAB.
 
 ENDMODULE.
+
+
+*&---------------------------------------------------------------------*
+*& Module PRDHA_VISIBILITY OUTPUT
+*&---------------------------------------------------------------------*
+*& *****  In cloud Product Hierarchy should be hidden
+*&---------------------------------------------------------------------*
+MODULE prdha_visibility OUTPUT.
+*****  In cloud Product Hierarchy should be hidden
+  IF cl_cos_utilities=>is_cloud( ) = abap_true.
+     LOOP AT SCREEN.
+       CHECK screen-name = 'MARA-PRDHA'.
+       screen-invisible = 1.
+       screen-active    = 0.
+       screen-input     = 0.
+       MODIFY SCREEN.
+     ENDLOOP.
+  ENDIF.
+ENDMODULE.

@@ -27,6 +27,7 @@ MODULE MARA-KZKFG.
 
   IF SY-SUBRC NE 0.                             "ch zu 4.0C
 *    MESSAGE E315(MM).                           "ch zu 4.0C
+    MARA-KZKFG = LMARA-KZKFG.                   "note 2812159
     MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno. "note 1418325
   ENDIF.                                        "ch zu 4.0C
 

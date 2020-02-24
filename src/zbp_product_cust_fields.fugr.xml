@@ -5063,8 +5063,8 @@
       <DESCRIPT>BP Assignment Screen on Basic Data 1</DESCRIPT>
       <TYPE>I</TYPE>
       <NEXTSCREEN>9001</NEXTSCREEN>
-      <LINES>001</LINES>
-      <COLUMNS>080</COLUMNS>
+      <LINES>021</LINES>
+      <COLUMNS>121</COLUMNS>
      </HEADER>
      <CONTAINERS>
       <RPY_DYCATT>
@@ -5076,11 +5076,25 @@
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>FRAME</TYPE>
+       <NAME>BP</NAME>
+       <TEXT>Business_Partner_________________________________________________________________</TEXT>
+       <LINE>002</LINE>
+       <COLUMN>001</COLUMN>
+       <LENGTH>082</LENGTH>
+       <VISLENGTH>082</VISLENGTH>
+       <HEIGHT>003</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>CHECK</TYPE>
        <NAME>ZZGV_BP_ASSIGNED</NAME>
        <TEXT>BP_Assigned</TEXT>
-       <LINE>001</LINE>
-       <COLUMN>045</COLUMN>
+       <LINE>003</LINE>
+       <COLUMN>003</COLUMN>
        <LENGTH>013</LENGTH>
        <VISLENGTH>013</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -5093,13 +5107,11 @@
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>PUSH</TYPE>
        <NAME>BUT_BP</NAME>
-       <ICON_NAME>ICON_NEXT_HIERARCHY_LEVEL</ICON_NAME>
-       <ICON_QINFO>BP_Assignment</ICON_QINFO>
-       <ICON_QSPEC>X</ICON_QSPEC>
+       <ICON_NAME>ICON_INSERT_RELATION</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>001</LINE>
+       <LINE>003</LINE>
        <COLUMN>074</COLUMN>
-       <LENGTH>019</LENGTH>
+       <LENGTH>004</LENGTH>
        <VISLENGTH>003</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <PUSH_FCODE>ZBP_CALL</PUSH_FCODE>
@@ -5164,7 +5176,7 @@
       <PROGRAM>SAPLZBP_PRODUCT_CUST_FIELDS</PROGRAM>
       <SCREEN>9002</SCREEN>
       <LANGUAGE>E</LANGUAGE>
-      <DESCRIPT>Header Data: Material Number/ID Code</DESCRIPT>
+      <DESCRIPT>Header Data: Material Number/BP Assignment</DESCRIPT>
       <TYPE>I</TYPE>
       <NEXTSCREEN>9002</NEXTSCREEN>
       <LINES>016</LINES>
@@ -5673,8 +5685,10 @@
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <FROM_DICT>X</FROM_DICT>
+       <PARAM_ID>BPO</PARAM_ID>
        <INPUT_FLD>X</INPUT_FLD>
        <OUTPUT_FLD>X</OUTPUT_FLD>
+       <DICT_I_FKY>X</DICT_I_FKY>
       </RPY_DYFATC>
       <RPY_DYFATC>
        <CONT_TYPE>TABLE_CTRL</CONT_TYPE>
@@ -5848,6 +5862,9 @@
        <LINE>FIELD zrjpbupat1-bu_partner.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
+       <LINE>*      FIELD zrjpbupat1-bupa_bez MODULE get_bp_text.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
        <LINE>FIELD zrjpbupat1-bu_rltyp.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
@@ -5865,6 +5882,9 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*       MODULE zz_bpassign_check.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>MODULE get_bp_text_role_title.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>MODULE zz_bpassign_modify_tab.</LINE>
@@ -5939,6 +5959,7 @@
       <item>2</item>
       <item>4</item>
       <item>6</item>
+      <item>0</item>
       <item>6</item>
       <item>6</item>
       <item>6</item>
@@ -5946,6 +5967,7 @@
       <item>0</item>
       <item>6</item>
       <item>0</item>
+      <item>6</item>
       <item>6</item>
       <item>0</item>
       <item>0</item>

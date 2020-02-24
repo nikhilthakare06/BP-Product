@@ -13,6 +13,7 @@ ENDMODULE.
 
 MODULE zz_bpassign_get_sub OUTPUT.
   IF sy-ucomm = 'ZBP_CALL'.
+    CLEAR zzgt_bpassign.
     CALL FUNCTION 'Z_MM_BPASSIGN_GET_SUB'
       EXPORTING
         iv_matnr             = rmmg1-matnr
@@ -20,7 +21,20 @@ MODULE zz_bpassign_get_sub OUTPUT.
         et_jptbupaassign_mem = zzgt_zmm_bpassign_mem
         et_jptbupaassign_db  = zzgt_zmm_bpassign_db.
 
-    MOVE-CORRESPONDING zzgt_zmm_bpassign_mem TO zzgt_bpassign.
+*    MOVE-CORRESPONDING zzgt_zmm_bpassign_mem TO zzgt_bpassign.
+    LOOP AT zzgt_zmm_bpassign_mem INTO DATA(ls_bpassign_mem).
+*      MATNR
+      APPEND INITIAL LINE TO zzgt_bpassign ASSIGNING FIELD-SYMBOL(<ls_bpassign>).
+      <ls_bpassign>-bu_partner = ls_bpassign_mem-partner.
+      <ls_bpassign>-bu_rltyp   = ls_bpassign_mem-rltyp.
+      <ls_bpassign>-order_role = ls_bpassign_mem-order_role.
+      <ls_bpassign>-date_from  = ls_bpassign_mem-date_from.
+      <ls_bpassign>-DATE_to    = ls_bpassign_mem-date_to.
+*ORDER_ROLE
+*NODE_KEY
+*ADR_KIND
+*TEXT
+    ENDLOOP.
 
   ENDIF.
 ENDMODULE.
@@ -54,6 +68,8 @@ MODULE zz_bpassign_display OUTPUT.
 
   IF sy-subrc = 0.
     MOVE-CORRESPONDING zzgs_bpassign TO zrjpbupat1.
+    PERFORM get_bp_text.
+    PERFORM get_role_text.
   ENDIF.
 
 ENDMODULE.
@@ -194,3 +210,46 @@ MODULE zz_bpassign_set_sub OUTPUT.
       it_jptbupaassign_mem = zzgt_zmm_bpassign_mem.
 
 ENDMODULE.
+
+
+*&---------------------------------------------------------------------*
+*&      Module  GET_BP_TEXT  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+FORM get_bp_text.
+
+  IF zrjpbupat1-bu_partner IS NOT INITIAL.
+*    BREAK thak04.
+    DATA lv_partner_name TYPE bus000flds-descrip.
+    CALL FUNCTION 'BUP_PARTNER_DESCRIPTION_GET'
+      EXPORTING
+        i_partner         = zrjpbupat1-bu_partner
+        i_xmemory         = 'X'
+        i_xwa             = 'X'
+*       I_VALDT           = SY-DATLO
+      IMPORTING
+        e_description     = lv_partner_name
+*       E_DESCRIPTION_NAME =
+      EXCEPTIONS
+        partner_not_found = 1
+        wrong_parameters  = 2.
+    zrjpbupat1-bupa_bez = lv_partner_name.
+  ENDIF.
+
+ENDFORM..
+*&---------------------------------------------------------------------*
+*&      Module  GET_ROLE_TEXT  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+FORM get_role_text.
+  IF zrjpbupat1-bu_rltyp IS NOT INITIAL.
+*    BREAK thak04.
+    SELECT SINGLE rltitl
+      FROM tb003t
+      INTO zrjpbupat1-role_bez
+      WHERE spras = sy-langu
+        AND role  = zrjpbupat1-bu_rltyp.
+  ENDIF.
+ENDFORM.

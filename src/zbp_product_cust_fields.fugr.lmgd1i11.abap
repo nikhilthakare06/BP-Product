@@ -31,7 +31,7 @@
 
     g_disfg = c_yes.
       IF ex_badi_mahd IS INITIAL.
-        CALL METHOD cl_exithandler=>get_instance "#EC CI_BADI_OLD
+        CALL METHOD cl_exithandler=>get_instance
           EXPORTING
             exit_name              = 'BADI_MAHD_INTF'
             null_instance_accepted = space

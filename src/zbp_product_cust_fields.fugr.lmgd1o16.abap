@@ -60,7 +60,8 @@ MODULE zusref_vorschlagen_a OUTPUT.
     SELECT SINGLE xchpf INTO @DATA(lv_temp_mxchpf) FROM mara BYPASSING BUFFER WHERE matnr = @marc-matnr.
     IF sy-subrc = 0 AND lv_temp_mxchpf = 'X'.
 
-      SELECT SINGLE xchpf INTO @DATA(lv_temp_xchpf) FROM marc BYPASSING BUFFER WHERE werks = @marc-werks AND matnr = @marc-matnr.
+      SELECT SINGLE xchpf INTO @DATA(lv_temp_xchpf) FROM v_marc_md
+         WHERE werks = @marc-werks AND matnr = @marc-matnr.
 
       IF sy-subrc = 0 AND lv_temp_xchpf IS INITIAL.
         EXIT.

@@ -1,4 +1,4 @@
-FUNCTION Z_MM_BPASSIGN_DB_POST.
+FUNCTION z_mm_bpassign_db_post.
 *"----------------------------------------------------------------------
 *"*"Update Function Module:
 *"
@@ -10,17 +10,17 @@ FUNCTION Z_MM_BPASSIGN_DB_POST.
 *"----------------------------------------------------------------------
   "insert
   IF lines( it_zmm_JPTBUPAASSIGN_insert ) GT 0.
-    INSERT zJPTBUPAASSIGN FROM TABLE it_zmm_JPTBUPAASSIGN_insert. "#EC CI_SUBRC
+    INSERT zjptbupaassign FROM TABLE it_zmm_jptbupaassign_insert. "#EC CI_SUBRC
   ENDIF.
 
   "update
   IF lines( it_zmm_JPTBUPAASSIGN_update ) GT 0.
-    MODIFY zJPTBUPAASSIGN FROM TABLE it_zmm_JPTBUPAASSIGN_update. "#EC CI_SUBRC
+    MODIFY zjptbupaassign FROM TABLE it_zmm_jptbupaassign_update. "#EC CI_SUBRC
   ENDIF.
 
   "delete
   IF lines( it_zmm_JPTBUPAASSIGN_delete ) GT 0.
-    DELETE zJPTBUPAASSIGN FROM TABLE it_zmm_JPTBUPAASSIGN_delete. "#EC CI_SUBRC
+    DELETE zjptbupaassign FROM TABLE it_zmm_jptbupaassign_delete. "#EC CI_SUBRC
   ENDIF.
 
 ENDFUNCTION.

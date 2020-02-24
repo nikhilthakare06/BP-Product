@@ -46,6 +46,16 @@ ENHANCEMENT-POINT lmgd1o1d_01 SPOTS es_lmgd1o1d INCLUDE BOUND.
           ENDIF.
         ENDIF.
       ENDIF.
+
+
+"{ Begin ENHO DIMP_GENERAL_LMGD1O1D IS-A DIMP_GENERAL }
+      IF screen-name EQ 'MARA-NTGEW'.
+        IF t133a-bilds EQ 'MC'.
+          screen-required = 1.
+        ENDIF.
+      ENDIF.
+"{ End ENHO DIMP_GENERAL_LMGD1O1D IS-A DIMP_GENERAL }
+
 ENHANCEMENT-POINT lmgd1o1d_06 SPOTS es_lmgd1o1d INCLUDE BOUND .
     ENDIF.                             "mk/4.0A
 

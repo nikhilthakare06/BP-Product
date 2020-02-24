@@ -21,3 +21,21 @@ MODULE MVKE-PRODH.
             LMVKE_PRODH  = LMVKE-PRODH
             P_MESSAGE    = ' '.
 ENDMODULE.
+*&---------------------------------------------------------------------*
+*& Module PRODH_VISIBILITY OUTPUT
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+MODULE prodh_visibility OUTPUT.
+
+  IF cl_cos_utilities=>is_cloud( ) = abap_true.
+    LOOP AT SCREEN.
+       CHECK screen-name = 'MVKE-PRODH'.
+       screen-invisible = 1.
+       screen-active    = 0.
+       screen-input     = 0.
+       MODIFY SCREEN.
+     ENDLOOP.
+  ENDIF.
+
+ENDMODULE.

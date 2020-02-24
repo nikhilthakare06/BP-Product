@@ -8,10 +8,10 @@ FUNCTION z_mm_bpassign_get_db_delta.
 *"----------------------------------------------------------------------
   CLEAR: et_zmm_jptbupaassign_insert, et_zmm_jptbupaassign_update, et_zmm_jptbupaassign_delete.
 *
-*  lcl_bpassign_helper=>get_db_delta(
-*    IMPORTING
-*      et_zmm_JPTBUPAASSIGN_insert = et_zmm_JPTBUPAASSIGN_insert
-*      et_zmm_JPTBUPAASSIGN_update = et_zmm_JPTBUPAASSIGN_update
-*      et_zmm_JPTBUPAASSIGN_delete = et_zmm_JPTBUPAASSIGN_delete ).
+  lcl_bpassign_helper=>get_db_delta(
+    IMPORTING
+      et_zmm_JPTBUPAASSIGN_insert = et_zmm_JPTBUPAASSIGN_insert
+      et_zmm_JPTBUPAASSIGN_update = et_zmm_JPTBUPAASSIGN_update
+      et_zmm_JPTBUPAASSIGN_delete = et_zmm_JPTBUPAASSIGN_delete ).
 
 ENDFUNCTION.

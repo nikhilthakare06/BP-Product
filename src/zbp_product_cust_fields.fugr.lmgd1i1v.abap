@@ -17,6 +17,9 @@
 *  Nach erfolgreicher Änderung wird das Rettfeld RET_XCHPF aktualisiert.
 *------------------------------------------------------------------
 MODULE marc-xchpf.
+  "note 2801626
+  DATA: lv_skip_check TYPE boolean VALUE ''.
+  CLEAR lv_skip_check.
 
   CHECK t130m-aktyp NE aktypa AND t130m-aktyp NE aktypz.
   CHECK bildflag IS INITIAL.           "mk/21.04.95
@@ -56,6 +59,10 @@ MODULE marc-xchpf.
   ELSE.
     IF lmara-xchpf NE mara-xchpf AND mara-xchpf IS INITIAL. "plant level batch changes
          marc-xchpf = mara-xchpf.
+         "note 2801626
+         IF lmarc-xchpf IS INITIAL.
+           lv_skip_check = x.
+         ENDIF.
     ENDIF.
     IF lmara-xchpf NE mara-xchpf. "plant level batch changes
       hxchpf = lmara-xchpf.
@@ -66,7 +73,7 @@ MODULE marc-xchpf.
 
 
 ENHANCEMENT-SECTION     lmgd1i1v_01 SPOTS es_lmgd1i1v INCLUDE BOUND.
-  IF rmmg1-werks IS NOT INITIAL.
+  IF rmmg1-werks IS NOT INITIAL AND lv_skip_check IS INITIAL.
       CALL FUNCTION 'MARC_XCHPF'
       EXPORTING
         neuflag           = neuflag
@@ -250,14 +257,14 @@ MODULE mara_xchpf INPUT.
         ENDIF.
         IF rmmzu-flg_fliste NE 'X' AND rmmzu-err_chpf NE 'X'.
           IF cl_vb_batch_factory=>util( )->get_default_batch_handling( iv_plant = marc-werks ).
-          marc-xchpf = mara-xchpf.
-          marc-xchar = marc-xchpf.
-          IF t130m-aktyp NE aktypa OR t130m-aktyp NE aktypz.
-            MESSAGE w662(mm).
-          ENDIF.
-        ELSE.
-          CLEAR marc-xchpf.
-          CLEAR marc-xchar.
+            marc-xchpf = mara-xchpf.
+            marc-xchar = marc-xchpf.
+            IF t130m-aktyp NE aktypa OR t130m-aktyp NE aktypz.
+              MESSAGE s662(mm).                           "note 2801626
+            ENDIF.
+          ELSE.
+            CLEAR marc-xchpf.
+            CLEAR marc-xchar.
           ENDIF.
         ENDIF.
 
